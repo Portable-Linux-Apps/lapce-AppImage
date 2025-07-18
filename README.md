@@ -1,4 +1,7 @@
-# lapce-AppImage
+# lapce-AppImage 🐧
+
+[![GitHub Downloads](https://img.shields.io/github/downloads/Portable-Linux-Apps/lapce-AppImage/total?logo=github&label=GitHub%20Downloads)](https://github.com/Portable-Linux-Apps/lapce-AppImage/releases/latest)
+[![CI Build Status](https://github.com//Portable-Linux-Apps/lapce-AppImage/actions/workflows/blank.yml/badge.svg)](https://github.com/Portable-Linux-Apps/lapce-AppImage/releases/latest)
 
 This repo takes the [official lapce binaries](https://github.com/lapce/lapce/releases) and turns them into an AppImage. 
 
