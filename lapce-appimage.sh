@@ -18,7 +18,7 @@ case "$ARCH" in
 		;;
 	'aarch64') 
 		arch=arm64
-		glibcver=2.28
+		glibcver=2.29
 		;;
 esac
 
