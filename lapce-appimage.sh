@@ -8,11 +8,18 @@ APPIMAGETOOL="https://github.com/pkgforge-dev/appimagetool-uruntime/releases/dow
 UPINFO="gh-releases-zsync|$(echo $GITHUB_REPOSITORY | tr '/' '|')|latest|*$ARCH.AppImage.zsync"
 DESKTOP="https://github.com/lapce/lapce/raw/refs/heads/master/extra/linux/dev.lapce.lapce.desktop"
 ICON="https://raw.githubusercontent.com/lapce/lapce/eb83cee172efed14850dfe32e4bf7a5053fc2839/icons/lapce/lapce_logo.svg"
+export URUNTIME_PRELOAD=1 # really needed here
 
 # lapce uses amd64 and arm64 instead
 case "$ARCH" in
-	'x86_64')  arch=amd64;;
-	'aarch64') arch=arm64;;
+	'x86_64')  
+		arch=amd64
+		glibcver=2.17
+		;;
+	'aarch64') 
+		arch=arm64
+		glibcver=2.28
+		;;
 esac
 
 tarball_url=$(wget "$REPO" -O - | sed 's/[()",{} ]/\n/g' \
@@ -31,6 +38,13 @@ ln -s lapce               ./AppDir/AppRun
 wget "$DESKTOP" -O        ./AppDir/lapce.desktop
 wget "$ICON"    -O        ./AppDir/dev.lapce.lapce.svg
 ln -s dev.lapce.lapce.svg ./AppDir/.DirIcon
+
+# get polyfil glibc so that it can work on very old distros
+git clone https://github.com/corsix/polyfill-glibc.git && (
+	cd ./polyfill-glibc
+	ninja polyfill-glibc
+)
+./polyfill-glibc/polyfill-glibc --target-glibc="$glibcver" ./AppDir/lapce
 
 wget "$APPIMAGETOOL" -O ./appimagetool
 chmod +x ./appimagetool
