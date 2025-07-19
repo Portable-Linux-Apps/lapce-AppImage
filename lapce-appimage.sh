@@ -49,3 +49,6 @@ git clone https://github.com/corsix/polyfill-glibc.git && (
 wget "$APPIMAGETOOL" -O ./appimagetool
 chmod +x ./appimagetool
 ./appimagetool -n -u "$UPINFO" ./AppDir
+
+mkdir ./dist
+mv *.AppImage* ./dist
